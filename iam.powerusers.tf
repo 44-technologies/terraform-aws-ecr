@@ -28,10 +28,8 @@ resource "aws_iam_group_membership" "ecr_power_user_group_member" {
   provider = aws.ecr
   count    = local.power_users_enabled
 
-  name = "${var.power_users_group.name}-members"
-
+  name  = "${var.power_users_group.name}-members"
   users = var.power_users
-
   group = aws_iam_group.ecr_power_user_group[0].name
 }
 
