@@ -28,7 +28,7 @@ resource "aws_iam_policy" "ecr_iam_role_policy" {
 
   name        = "ECR-Pull-Policy"
   description = "Enable to Pull from ECR"
-  policy      = templatefile("${path.root}/templates/ecr_read_role_policy.tftpl", {})
+  policy      = templatefile("${path.module}/templates/ecr_read_role_policy.tftpl", {})
 }
 
 
