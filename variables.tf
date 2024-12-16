@@ -3,15 +3,15 @@ variable "repositories" {
   default = []
 }
 
-variable "ecr_iam_policy_name" {
-  type    = string
-  default = "ecr_iam_policy_name"
-}
-
-
-variable "ecr_iam_role_name" {
-  type    = string
-  default = "ecr_iam_role_name"
+variable "sts" {
+  type = object({
+    iam_policy_name = string
+    iam_role_name   = string
+  })
+  default = {
+    iam_policy_name = "ecr-pull-policy"
+    iam_role_name   = "ecr-role-name"
+  }
 }
 
 
