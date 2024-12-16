@@ -28,7 +28,7 @@ resource "aws_iam_group_membership" "ecr_readers_user_group_member" {
   provider = aws.ecr
   count    = local.readers_enabled
 
-  name  = "${var.ecr_readers_user_group.name}-members"
+  name  = "${var.readers_users_group.name}-members"
   users = var.power_users
   group = aws_iam_group.ecr_readers_user_group[0].name
 }
