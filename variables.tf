@@ -39,3 +39,22 @@ variable "sts_iams" {
   default     = []
   description = "List with the names of the iam user already created"
 }
+
+
+# Readers
+variable "readers_users" {
+  type        = list(string)
+  default     = []
+  description = "List with the iam user readers"
+}
+
+variable "readers_users_group" {
+  type = object({
+    name = string
+    path = string
+  })
+  default = {
+    name = "ecr"
+    path = "ecr"
+  }
+}
