@@ -13,31 +13,18 @@ resource "aws_ecr_repository" "this" {
 }
 
 
-resource "aws_ecr_lifecycle_policy" "ecr_lifecycle_policy_untagged" {
+resource "aws_ecr_lifecycle_policy" "ecr_lifecycle_policy" {
   provider = aws.ecr
 
   for_each = toset(var.repositories)
 
   repository = aws_ecr_repository.this[each.key].name
 
-  policy = <<EOF
-{
-  "rules": [
-    {
-      "rulePriority": 1,
-      "description": "ECR Clean Untagged",
-      "selection": {
-        "tagStatus": "untagged",
-        "countType": "sinceImagePushed",
-        "countUnit": "days",
-        "countNumber": 3
-      },
-      "action": {
-        "type": "expire"
-      }
-    }
-  ]
-}
-EOF
+  policy = templatefile("${path.module}/templates/ecr_lifecycle_policy.tftpl", { 
+    untagged_unit : var.untagged_policy.unit, 
+    untagged_count: var.untagged_policy.count,
+    tagged_pattern : var.tagged_policy.pattern, 
+    tagged_count: var.tagged_policy.count }
+    )
 }
 

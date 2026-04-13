@@ -58,3 +58,25 @@ variable "readers_users_group" {
     path = "ecr"
   }
 }
+
+variable "untagged_policy" {
+  type = object({
+    unit = string
+    count = number
+  })
+  default = {
+    unit = "days"
+    count = 7
+  }
+}
+
+variable "tagged_policy" {
+  type = object({
+    pattern = string
+    retained = number
+  })
+  default = {
+    pattern = "*"
+    retained = 2
+  }
+}
