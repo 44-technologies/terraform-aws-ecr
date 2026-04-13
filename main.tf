@@ -24,7 +24,7 @@ resource "aws_ecr_lifecycle_policy" "ecr_lifecycle_policy" {
     untagged_unit : var.untagged_policy.unit, 
     untagged_count: var.untagged_policy.count,
     tagged_pattern : var.tagged_policy.pattern, 
-    tagged_count: var.tagged_policy.count }
-    )
+    tagged_count: var.tagged_policy.count
+  })
 }
 
