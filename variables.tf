@@ -73,10 +73,10 @@ variable "untagged_policy" {
 variable "tagged_policy" {
   type = object({
     pattern = string
-    retained = number
+    count = number
   })
   default = {
     pattern = "*"
-    retained = 2
+    count = 2
   }
 }
