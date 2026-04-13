@@ -1,0 +1,30 @@
+{
+    "rules": [
+        {
+            "rulePriority": 1,
+            "description": "ECR Clean Untagged",
+            "selection": {
+                "tagStatus": "untagged",
+                "countType": "sinceImagePushed",
+                "countUnit": "${untagged_unit}",
+                "countNumber": ${untagged_count}
+            },
+            "action": {
+                "type": "expire"
+            }
+        },
+        {
+            "rulePriority": 2,
+            "description": "ECR Clean Tagged",
+            "selection": {
+                "tagStatus": "tagged",
+                "tagPatternList": ["${tagged_pattern}"],
+                "countType": "imageCountMoreThan",
+                "countNumber": ${tagged_count}
+            },
+            "action": {
+                "type": "expire"
+            }
+        }
+    ]
+}
